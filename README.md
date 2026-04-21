@@ -418,3 +418,10 @@ Además del chatbot integrado, el backend expone un **servidor MCP sobre SSE** e
 | `CORS_ORIGINS` | `http://localhost:5173,...` | Orígenes permitidos para CORS |
 
 **EXTRA:** Estas decisiones reflejan un enfoque de ingeniería orientado a la fiabilidad del dato y la escalabilidad del sistema en entornos de alta demanda.
+
+---
+
+## Autor
+
+**Sebastián Carroz** — Ingeniería de Sistemas, Universidad El Bosque  
+RappiMakers 2026
