@@ -15,16 +15,13 @@ import java.util.logging.Logger;
 /**
  * Orquesta la conversación con Gemma via Spring AI + Ollama.
  *
- * El system prompt se construye cargando los archivos Markdown del workspace
- * del agente (patrón tomado de Hercules/OpenClaw):
- *   - IDENTITY.md  → quién es el agente
- *   - SOUL.md      → reglas de comportamiento
- *   - ORCHESTRATOR.md → flujo de decisión
- *   - TOOLS.md     → referencia de las tools disponibles
+ * Optimizaciones de latencia:
  *
- * Las tools se registran pasando directamente el objeto con @Tool —
- * Spring AI 1.0.0 requiere .defaultTools(Object...) con la instancia,
- * no un ToolCallbackProvider en el builder.
+ * 1. SYSTEM PROMPT EN CACHÉ: los archivos Markdown se leen una sola vez
+ *    en el constructor. Cero I/O en cada request.
+ *
+ * 2. TOOLS CON CACHÉ: StoreVisibilityMcpTools cachea los resultados de BD,
+ *    eliminando latencia de PostgreSQL en tool calls repetidos.
  */
 @Service
 public class ChatService {
@@ -39,15 +36,12 @@ public class ChatService {
 
         String systemPrompt = buildSystemPrompt();
 
-        // .defaultTools() acepta instancias de objetos con métodos @Tool
-        // NO acepta ToolCallbackProvider — ese es para el MCP Server, no el ChatClient
         this.chatClient = ChatClient.builder(ollamaChatModel)
                 .defaultSystem(systemPrompt)
                 .defaultTools(storeVisibilityMcpTools)
                 .build();
 
-        log.info("ChatService: inicializado. System prompt: "
-                + systemPrompt.length() + " chars");
+        log.info("ChatService: listo. System prompt: " + systemPrompt.length() + " chars");
     }
 
     // ── Chat ──────────────────────────────────────────────────

@@ -32,3 +32,25 @@ Retorna estadísticas detalladas de ese día específico: total puntos, min, max
 promedio y hora pico de ese día.
 
 Úsala cuando: el usuario pregunta sobre una fecha específica.
+
+## analyze_patterns
+Realiza análisis estadístico profundo sobre el dataset completo. Retorna:
+- Tendencia general del período (CRECIENTE / DECRECIENTE / ESTABLE) con % de cambio
+- Comparación días de semana vs fines de semana (avg y diferencia porcentual)
+- Día más activo y menos activo con sus promedios
+- Día más volátil y más estable (diferencia max-min)
+- Horas pico por franja: mañana (6-11), tarde (12-17), noche (18-23)
+- Hora valle (menor actividad del día)
+- Anomalías detectadas: días con desviación >15% del promedio global
+
+Úsala cuando: el usuario pide insights, patrones, análisis, anomalías,
+comparaciones entre días laborales y fines de semana, recomendaciones de negocio,
+o cualquier pregunta analítica sobre el comportamiento general del dataset.
+
+Ejemplos de trigger:
+- "analiza los datos"
+- "dame insights"
+- "qué patrones encuentras"
+- "hay alguna anomalía"
+- "cómo se comparan los fines de semana"
+- "dame un análisis completo"
