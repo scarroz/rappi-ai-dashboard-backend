@@ -36,7 +36,7 @@ El agente conversacional está potenciado por **Gemma 4 E2B**, modelo de lenguaj
                    │ REST              │ POST /api/chat
                    ▼                  ▼
 ┌─────────────────────────────────────────────────────────────┐
-│               Spring Boot Backend  :8080                     │
+│               Spring Boot Backend  :8081                     │
 │                                                              │
 │   REST API  /api/analytics/**   →  dashboard charts         │
 │   ChatController  /api/chat     →  chatbot UI               │
